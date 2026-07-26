@@ -1,11 +1,11 @@
-// Set Up Express Application
 const express = require('express');
+const path = require('path');
+
 const app = express();
 
-// Home route
-app.get('/', (req, res) => {
-    res.send('Hello World');})
+// Serve files from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Start Server
-app.listen(3000, () => { 
-    console.log('Sever is running on https://localhost:3000');});
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});
