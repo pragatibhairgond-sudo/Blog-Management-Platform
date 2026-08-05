@@ -73,3 +73,4 @@ app.delete('/api/blogs/:id', (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+<!--Blog Management Platform-->
