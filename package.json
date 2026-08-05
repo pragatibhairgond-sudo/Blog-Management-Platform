@@ -1,20 +1,12 @@
 {
-  "name": "my-blog-project",
+  "name": "tech-blog",
   "version": "1.0.0",
-  "description": "Simple Blog Website using HTML and Express",
+  "description": "Full stack tech blog application",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  }, 
-  "author": "Your Name",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^5.1.0"
+    "start": "node server.js"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.10"
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }
-
-
