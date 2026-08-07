@@ -1,23 +1,26 @@
 [
   {
     "id": 1,
-    "title": "Getting Started with Modern JavaScript",
-    "author": "Pragati Bhairgond",
-    "category": "#AI_ML",
-    "description": "Learn the essential fundamentals of modern JavaScript, including arrow functions, DOM manipulation, and modern ES6 features."
+    "title": "How AI is changing web development in 2026",
+    "author": "Aarti Kamble",
+    "category": "Web Dev",
+    "content": "AI tools are speeding up full-stack development workflows and code generation.",
+    "date": "2026-07-24"
   },
   {
     "id": 2,
-    "title": "Building RESTful APIs with Node.js & Express",
-    "author": "Tech Explorer",
-    "category": "#Cloud_DevOps",
-    "description": "A comprehensive beginner-friendly guide to setting up route handlers, middleware, and handling JSON data in Express."
+    "title": "Mastering CSS Grid and Modern Layouts",
+    "author": "Alex Rivera",
+    "category": "CSS Design",
+    "content": "Combining CSS Flexbox and CSS Grid gives you complete creative control over UI components.",
+    "date": "2026-07-30"
   },
   {
     "id": 3,
-    "title": "Deploying Web Applications to GitHub Pages",
-    "author": "Frontend Dev",
-    "category": "#Web_Dev",
-    "description": "Discover how to configure repository settings, resolve missing static assets, and deploy responsive web projects seamlessly."
+    "title": "Building RESTful APIs with Express.js",
+    "author": "Aarti Kamble",
+    "category": "Technology",
+    "content": "Express.js simplifies route handling and request management in Node.js.",
+    "date": "2026-07-31"
   }
 ]
