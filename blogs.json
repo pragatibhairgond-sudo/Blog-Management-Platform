@@ -1,35 +1,20 @@
-async function fetchBlogs() {
-  try {
-    const res = await fetch('/api/blogs');
-    if (!res.ok) throw new Error("Backend offline");
-    allBlogs = await res.json();
-  } catch (err) {
-    console.warn("Backend API not connected. Displaying fallback articles:", err);
-    
-    // Fallback sample data so posts appear on GitHub Pages
-    allBlogs = [
-      {
-        id: 1,
-        title: "HTML Basics & Modern Semantic Tags",
-        author: "Tim Berners-Lee",
-        description: "HTML is the backbone of the web. Learn about modern semantic elements, accessibility, and structured document markup.",
-        date: "Aug 4, 2026"
-      },
-      {
-        id: 2,
-        title: "Mastering CSS Flexbox & Modern Grid",
-        author: "Håkon Wium Lie",
-        description: "Explore how to build modern responsive web page layouts effortlessly using flexible box containers and 2D grid systems.",
-        date: "Aug 5, 2026"
-      },
-      {
-        id: 3,
-        title: "Async JavaScript & The Fetch API",
-        author: "Brendan Eich",
-        description: "Understand Promises, async/await syntax, and how to seamlessly fetch data from RESTful APIs in modern web applications.",
-        date: "Aug 6, 2026"
-      }
-    ];
+[
+  {
+    "id": 1,
+    "title": "Getting Started with Modern JavaScript",
+    "category": "#AI_ML",
+    "description": "Learn the essential fundamentals of modern JavaScript, including arrow functions, DOM manipulation, and modern ES6 features."
+  },
+  {
+    "id": 2,
+    "title": "Building RESTful APIs with Node.js & Express",
+    "category": "#Cloud_DevOps",
+    "description": "A comprehensive beginner-friendly guide to setting up route handlers, middleware, and handling JSON data in Express."
+  },
+  {
+    "id": 3,
+    "title": "Deploying Web Applications to GitHub Pages",
+    "category": "#Web_Dev",
+    "description": "Discover how to configure repository settings, resolve missing static assets, and deploy responsive web projects seamlessly."
   }
-  renderBlogs(allBlogs);
-}
+]
