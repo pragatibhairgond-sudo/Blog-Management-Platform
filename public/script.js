@@ -1,76 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const blogList = document.getElementById('blog-list');
-  const blogForm = document.getElementById('blog-form');
-
-  // If on Home Page, fetch and show blogs
-  if (blogList) {
-    fetchBlogs();
-  }
-
-  // If on Add Blog Page, handle form submission
-  if (blogForm) {
-    blogForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const title = document.getElementById('title').value;
-      const author = document.getElementById('author').value;
-      const description = document.getElementById('description').value;
-
-      try {
-        const response = await fetch('./blogs.json', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, author, description })
-        });
-
-        if (response.ok) {
-          window.location.href = './index.html';
-        }
-      } catch (err) {
-        console.error('Error adding blog:', err);
-      }
-    });
-  }
+  fetchBlogs();
 });
 
-// Fetch and display blogs from local blogs.json file
 async function fetchBlogs() {
+  let blogs = [];
+
+  // Try fetching blogs.json from public directory first, then root directory
   try {
-    const res = await fetch('./blogs.json');
-    const blogs = await res.json();
-    const blogContainer = document.getElementById('blog-list');
-    
-    if (!blogContainer) return;
-    blogContainer.innerHTML = '';
+    let res = await fetch('./public/blogs.json');
+    if (!res.ok) {
+      res = await fetch('./blogs.json');
+    }
+    blogs = await res.json();
+  } catch (err) {
+    console.error('Error loading blogs.json:', err);
+    return;
+  }
+
+  // Find article container in HTML
+  const blogContainer = document.getElementById('blog-list') || 
+                        document.querySelector('.blog-grid') || 
+                        document.querySelector('.horizontal-showcase');
+
+  if (blogContainer) {
+    blogContainer.innerHTML = ''; // Clear container
 
     blogs.forEach(blog => {
       const card = document.createElement('div');
       card.className = 'blog-card';
+      card.style.border = '1px solid #333';
+      card.style.padding = '15px';
+      card.style.margin = '10px 0';
+      card.style.borderRadius = '8px';
+      card.style.background = 'rgba(255,255,255,0.05)';
+
       card.innerHTML = `
-        <h2>${blog.title || 'Untitled'}</h2>
-        <p class="author">By <strong>${blog.author || 'Anonymous'}</strong></p>
-        <p class="description">${blog.description || ''}</p>
-        <button class="delete-btn" onclick="deleteBlog(${blog.id})">Delete</button>
+        <h3 style="color: #61dafb; margin-top: 0;">${blog.title}</h3>
+        <p style="color: #aaa; font-size: 0.9em;">By <strong>${blog.author}</strong></p>
+        <p style="color: #ddd;">${blog.description}</p>
       `;
       blogContainer.appendChild(card);
     });
-
-    // Update total articles counter if element exists
-    const totalCountElem = document.getElementById('total-articles');
-    if (totalCountElem) {
-      totalCountElem.textContent = blogs.length;
-    }
-  } catch (err) {
-    console.error('Error fetching blogs:', err);
   }
-}
 
-// Delete blog function
-async function deleteBlog(id) {
-  try {
-    console.log(`Deleting blog with id: ${id}`);
-    fetchBlogs();
-  } catch (err) {
-    console.error('Error deleting blog:', err);
+  // Update total articles counter
+  const totalCountElem = document.getElementById('total-articles') || 
+                         document.querySelector('.badge span');
+  if (totalCountElem) {
+    totalCountElem.textContent = blogs.length;
   }
 }

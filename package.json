@@ -1,34 +1,15 @@
 {
-<<<<<<< HEAD
-  "name": "tech-blog",
+  "name": "blog-management-platform",
   "version": "1.0.0",
-  "description": "Full stack tech blog application",
+  "description": "A simple blog management system built with Node.js and Express",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
-  }
-}
-=======
-  "name": "my-blog-project",
-  "version": "1.0.0",
-  "description": "Simple Blog Website using HTML and Express",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  }, 
-  "author": "Your Name",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^5.1.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.10"
+    "express": "^4.18.2"
   }
 }
 
 
->>>>>>> 6d1d370a8745fb313ff450b7dd905b516f0bcfe9
