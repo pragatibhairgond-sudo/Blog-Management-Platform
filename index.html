@@ -1,613 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Developer's Corner • Article Stream</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer's Corner</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap');
-
-    :root {
-      --bg-dark: #080d1a;
-      --card-bg: rgba(18, 26, 47, 0.85);
-      --card-border: rgba(255, 255, 255, 0.12);
-      
-      --cyan-glow: #00f2fe;
-      --purple-accent: #a855f7;
-      
-      --edit-grad: linear-gradient(135deg, #6366f1, #a855f7);
-      --delete-grad: linear-gradient(135deg, #f43f5e, #e11d48);
-      --news-grad: linear-gradient(135deg, #00f2fe, #4facfe);
-      --primary-grad: linear-gradient(135deg, #00f2fe, #a855f7, #f43f5e);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: #0b0f19;
       color: #f8fafc;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 20px;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-image: 
-        radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.15) 0px, transparent 35%),
-        radial-gradient(circle at 90% 90%, rgba(244, 63, 94, 0.15) 0px, transparent 35%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 35px 35px, 35px 35px;
-      overflow-x: hidden;
     }
 
-    h1, h2, h3, .logo {
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    /* Navbar */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 8%;
-      background: rgba(8, 13, 26, 0.88);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--card-border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 16px 28px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      margin-bottom: 28px;
     }
 
     .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
-      background: var(--primary-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #f1f5f9;
     }
 
-    nav {
-      display: flex;
-      gap: 0.8rem;
-    }
-
-    .nav-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: #94a3b8;
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 0.65rem 1.4rem;
-      border-radius: 100px;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .nav-btn:hover {
-      color: #ffffff;
-      background: rgba(168, 85, 247, 0.2);
-      border-color: var(--purple-accent);
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
-      transform: translateY(-2px);
-    }
-
-    .nav-btn.active {
-      color: #ffffff;
-      background: rgba(168, 85, 247, 0.25);
-      border-color: var(--purple-accent);
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-    }
-
-    .nav-btn.highlight {
-      background: var(--news-grad);
-      color: #000;
-      font-weight: 800;
-      border: none;
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
-    }
-
-    main {
-      flex: 1;
-      max-width: 1280px;
-      width: 90%;
-      margin: 2.5rem auto;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-      animation: tabSlide 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes tabSlide {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Hero Banner */
-    .hero-banner {
+    .hero {
       text-align: center;
-      padding: 3.5rem 2rem;
-      border-radius: 32px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(20px);
-      margin-bottom: 2.5rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 20px;
+      margin-bottom: 35px;
     }
 
-    .hero-banner h1 {
-      font-size: 3.5rem;
+    .hero h1 {
+      font-size: 2.2rem;
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 0.8rem;
+      margin-bottom: 10px;
     }
 
-    .hero-banner h1 span {
-      background: var(--primary-grad);
+    .hero h1 span {
+      background: linear-gradient(90deg, #38bdf8, #ec4899);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-banner p {
+    .hero p {
       color: #94a3b8;
-      font-size: 1.1rem;
-      max-width: 650px;
-      margin: 0 auto 2rem;
-      line-height: 1.5;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
     }
 
-    .hero-actions {
+    .search-bar {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1.2rem;
-      flex-wrap: wrap;
+      gap: 15px;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    .search-box input {
-      width: 380px;
-      padding: 0.9rem 1.6rem;
-      background: rgba(8, 13, 26, 0.9);
-      border: 1px solid var(--card-border);
-      border-radius: 100px;
-      color: #fff;
-      font-size: 0.95rem;
+    .search-bar input {
+      flex: 1;
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 23, 42, 0.8);
+      color: #ffffff;
       outline: none;
-      transition: all 0.35s ease;
     }
 
-    .search-box input:focus {
-      border-color: var(--cyan-glow);
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
-      transform: scale(1.02);
+    .badge {
+      background: #6366f1;
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
     }
 
-    .total-pill {
-      background: rgba(168, 85, 247, 0.15);
-      border: 1px solid rgba(168, 85, 247, 0.4);
-      color: #e9d5ff;
-      font-size: 0.9rem;
+    main h2 {
+      font-size: 1.25rem;
       font-weight: 700;
-      padding: 0.85rem 1.5rem;
-      border-radius: 100px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+      margin-bottom: 20px;
     }
 
-    .total-pill span {
-      color: var(--cyan-glow);
-      font-size: 1.1rem;
-      font-weight: 800;
-    }
-
-    .explorer-bar {
+    .horizontal-showcase {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .scroll-stream {
-      display: flex;
-      gap: 1.8rem;
+      gap: 20px;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 1rem 0.5rem 2.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: var(--cyan-glow) var(--bg-dark);
+      padding-bottom: 20px;
     }
 
-    .scroll-stream::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .scroll-stream::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 10px;
-    }
-
-    .scroll-stream::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, var(--cyan-glow), var(--purple-accent));
-      border-radius: 10px;
-    }
-
-    .stream-card {
-      flex: 0 0 360px;
-      scroll-snap-align: start;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 2.2rem;
+    .showcase-card {
+      min-width: 300px;
+      max-width: 330px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      backdrop-filter: blur(16px);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
     }
 
-    .stream-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: var(--cyan-glow);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 242, 254, 0.25);
-    }
-
-    .card-top-bar {
+    .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .tag-pill {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
     .card-actions {
       display: flex;
-      gap: 0.4rem;
+      gap: 6px;
     }
 
-    .btn-edit {
-      background: var(--edit-grad);
-      color: #ffffff;
+    .btn-edit, .btn-delete {
       border: none;
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
       cursor: pointer;
-    }
-
-    .btn-delete {
-      background: var(--delete-grad);
       color: #ffffff;
-      border: none;
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      cursor: pointer;
     }
 
-    .tag-badge {
-      font-size: 0.72rem;
-      font-family: 'Fira Code', monospace;
-      font-weight: 700;
-      color: var(--cyan-glow);
-      background: rgba(0, 242, 254, 0.08);
-      padding: 0.25rem 0.65rem;
-      border-radius: 8px;
-      border: 1px solid rgba(0, 242, 254, 0.2);
-    }
+    .btn-edit { background: #6366f1; }
+    .btn-delete { background: #f43f5e; }
 
-    .stream-card h3 {
-      font-size: 1.45rem;
-      margin-bottom: 0.8rem;
+    .card-title {
       color: #ffffff;
-      line-height: 1.35;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 10px 0;
     }
 
-    .stream-card p {
+    .card-desc {
       color: #94a3b8;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 1.4rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-      font-size: 0.8rem;
-      color: var(--cyan-glow);
-    }
-
-    .btn-zoom {
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid var(--cyan-glow);
-      color: #ffffff;
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .card-footer {
-      padding-top: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.85rem;
-      color: #64748b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    /* Modal Overlays */
-    .zoom-overlay, .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(8, 13, 26, 0.92);
-      backdrop-filter: blur(20px);
-      z-index: 10000;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .zoom-overlay.active, .modal-overlay.active {
-      display: flex;
-    }
-
-    .zoom-card, .modal-card {
-      background: rgba(18, 26, 47, 0.95);
-      border: 1.5px solid var(--cyan-glow);
-      border-radius: 32px;
-      padding: 2.5rem;
-      max-width: 750px;
-      width: 100%;
-      position: relative;
-    }
-
-    .zoom-close, .close-btn {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.8rem;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    .studio-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 900px) {
-      .studio-container { grid-template-columns: 1fr; }
-    }
-
-    .studio-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 28px;
-      padding: 2rem;
-    }
-
-    .input-group {
-      margin-bottom: 1.2rem;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #94a3b8;
-      margin-bottom: 0.4rem;
-    }
-
-    .input-group input, .input-group textarea {
-      width: 100%;
-      background: rgba(8, 13, 26, 0.85);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 0.9rem;
-      color: #ffffff;
-      outline: none;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--news-grad);
-      border: none;
-      border-radius: 12px;
-      color: #080d1a;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .live-preview-pane {
-      background: rgba(8, 13, 26, 0.9);
-      border: 1px dashed var(--cyan-glow);
-      border-radius: 28px;
-      padding: 2rem;
+      line-height: 1.45;
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
-      border-top: 1px solid var(--card-border);
+      margin-top: 50px;
       color: #64748b;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
   <header>
     <div class="logo">⚡ Developer's Corner</div>
-    <nav>
-      <button class="nav-btn active" onclick="switchTab('home')">Home</button>
-      <button class="nav-btn highlight" onclick="switchTab('create')">+ Create Post</button>
-    </nav>
   </header>
 
+  <section class="hero">
+    <h1>Welcome to <span>Developer's Corner</span></h1>
+    <p>Discover insightful articles, tutorials, and tips on modern full-stack engineering.</p>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search articles by title...">
+      <div class="badge">Total Articles: <span id="total-articles">0</span></div>
+    </div>
+  </section>
+
   <main>
-    <!-- Home Tab -->
-    <section id="home" class="tab-content active">
-      <div class="hero-banner">
-        <h1>Welcome to My<span>Tech Blog</span></h1>
-        <p>Discover insightful articles, tutorials, and tips on modern full-stack engineering.</p>
-        
-        <div class="hero-actions">
-          <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔍 Search articles by title..." onkeyup="filterBlogs()" />
-          </div>
-
-          <div class="total-pill">
-            Total Articles: <span id="total-count">0</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="explorer-bar">
-        <h2>🔥 Latest Blogs</h2>
-        <span style="font-family:'Fira Code', monospace; font-size:0.8rem; color:var(--cyan-glow);">[ ↔️ SCROLL OR DRAG TO EXPLORE ]</span>
-      </div>
-
-      <div id="recent-blogs-grid" class="scroll-stream">
-        <!-- Dynamic Cards Render Here -->
-      </div>
-    </section>
-
-    <!-- Studio Publisher Tab -->
-    <section id="create" class="tab-content">
-      <div class="studio-container">
-        <div class="studio-card">
-          <h2>📝 Author Studio</h2>
-          <p style="color:#64748b; font-size:0.85rem; margin-bottom:1.5rem;">Compose your post with live real-time previewing.</p>
-          
-          <form id="add-blog-form">
-            <div class="input-group">
-              <label for="title">Article Title</label>
-              <input type="text" id="title" placeholder="e.g. Next-Gen Web Assembly" oninput="updateLivePreview()" required />
-            </div>
-            <div class="input-group">
-              <label for="author">Author Name</label>
-              <input type="text" id="author" placeholder="e.g. Sarah Connor" oninput="updateLivePreview()" required />
-            </div>
-            <div class="input-group">
-              <label for="description">Article Content</label>
-              <textarea id="description" rows="5" placeholder="Write article content here..." oninput="updateLivePreview()" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">🚀 Confirm & Publish Post</button>
-          </form>
-        </div>
-
-        <div class="live-preview-pane">
-          <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--cyan-glow); display:block; margin-bottom: 1.2rem;">// LIVE CARD PREVIEW</span>
-          
-          <div class="stream-card" style="border-color: rgba(0, 242, 254, 0.4);">
-            <div>
-              <div class="card-top-bar">
-                <span class="tag-badge">#LIVE_PREVIEW</span>
-              </div>
-              <h3 id="preview-title">Article Title Preview</h3>
-              <p id="preview-desc">Article content will dynamically appear here as you type...</p>
-            </div>
-            <div>
-              <div class="card-meta">
-                <span id="preview-readtime">⏱️ 1 min read</span>
-                <span class="btn-zoom">🔎 Read Blog</span>
-              </div>
-              <div class="card-footer">
-                <span>By <strong id="preview-author">Author Name</strong></span>
-                <span>📅 Aug 7, 2026</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <h2>🔥 Horizontal Article Showcase</h2>
+    <div id="blog-list" class="horizontal-showcase"></div>
   </main>
-
-  <!-- ZOOM LIGHTBOX OVERLAY -->
-  <div id="zoom-modal" class="zoom-overlay" onclick="closeZoomModal(event)">
-    <div class="zoom-card" onclick="event.stopPropagation()">
-      <button class="zoom-close" onclick="closeZoomModal(event)">&times;</button>
-      <h2 id="zoom-title" style="font-size: 2rem; color: #fff; margin-bottom: 1rem;">Article Title</h2>
-      <div style="font-size: 0.88rem; color: var(--cyan-glow); margin-bottom: 1.5rem; display: flex; gap: 1.5rem;">
-        <span>By <strong id="zoom-author" style="color:#fff;">Author</strong></span>
-        <span id="zoom-date">📅 Aug 7, 2026</span>
-        <span id="zoom-readtime">⏱️ 2 min read</span>
-      </div>
-      <div style="border-top: 1px solid var(--card-border); padding-top: 1.5rem;">
-        <p id="zoom-desc" style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">Read Blog content text goes here...</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Edit Article Modal -->
-  <div id="edit-modal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2 style="margin-bottom:1rem;">✏️ Edit Article</h2>
-        <button class="close-btn" onclick="closeEditModal()">&times;</button>
-      </div>
-      <form id="edit-blog-form">
-        <input type="hidden" id="edit-id" />
-        <div class="input-group">
-          <label for="edit-title">Article Title</label>
-          <input type="text" id="edit-title" required />
-        </div>
-        <div class="input-group">
-          <label for="edit-author">Author Name</label>
-          <input type="text" id="edit-author" required />
-        </div>
-        <div class="input-group">
-          <label for="edit-description">Article Content</label>
-          <textarea id="edit-description" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Save Changes</button>
-      </form>
-    </div>
-  </div>
 
   <footer>
     <p>© 2026 Developer's Corner • Powered by Node.js & Express</p>
   </footer>
 
-  <!-- External Script Loaded at the End -->
-  <script src="script.js"></script>
+  <script>
+    const defaultData = [
+      {
+        id: 1,
+        title: "Getting Started with Modern JavaScript",
+        category: "#AI_ML",
+        description: "Learn the essential fundamentals of modern JavaScript, including arrow functions, DOM manipulation, and modern ES6 features."
+      },
+      {
+        id: 2,
+        title: "Building RESTful APIs with Node.js & Express",
+        category: "#Cloud_DevOps",
+        description: "A comprehensive beginner-friendly guide to setting up route handlers, middleware, and handling JSON data in Express."
+      },
+      {
+        id: 3,
+        title: "Deploying Web Applications to GitHub Pages",
+        category: "#Web_Dev",
+        description: "Discover how to configure repository settings, resolve missing static assets, and deploy responsive web projects seamlessly."
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initApp();
+    });
+
+    function initApp() {
+      let stored = localStorage.getItem("my_blog_posts");
+      let blogs = stored ? JSON.parse(stored) : defaultData;
+
+      if (!stored || blogs.length === 0) {
+        localStorage.setItem("my_blog_posts", JSON.stringify(defaultData));
+        blogs = defaultData;
+      }
+
+      render(blogs);
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const q = e.target.value.toLowerCase();
+          const filtered = blogs.filter(b => 
+            b.title.toLowerCase().includes(q) || b.description.toLowerCase().includes(q)
+          );
+          render(filtered);
+        });
+      }
+    }
+
+    function render(list) {
+      const container = document.getElementById('blog-list');
+      const totalElem = document.getElementById('total-articles');
+
+      if (totalElem) totalElem.textContent = list.length;
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'showcase-card';
+        card.innerHTML = `
+          <div class="card-header">
+            <span class="tag-pill">${item.category}</span>
+            <div class="card-actions">
+              <button class="btn-edit">✏️ Edit</button>
+              <button class="btn-delete" onclick="removePost(${item.id})">🗑️ Delete</button>
+            </div>
+          </div>
+          <h3 class="card-title">${item.title}</h3>
+          <p class="card-desc">${item.description}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function removePost(id) {
+      let current = JSON.parse(localStorage.getItem("my_blog_posts")) || defaultData;
+      current = current.filter(b => b.id !== id);
+      localStorage.setItem("my_blog_posts", JSON.stringify(current));
+      render(current);
+    }
+  </script>
 </body>
 </html>
