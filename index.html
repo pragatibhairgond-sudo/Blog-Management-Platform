@@ -174,36 +174,16 @@
       font-weight: 600;
     }
 
-    /* --- STRICT 3 CARDS PER ROW SCROLL CONTAINER --- */
-    .blog-row-scroll {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 25px;
-      scroll-snap-type: x mandatory;
-      
-      scrollbar-width: thin;
-      scrollbar-color: #38bdf8 rgba(255, 255, 255, 0.05);
-    }
-
-    .blog-row-scroll::-webkit-scrollbar {
-      height: 10px;
-    }
-    .blog-row-scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-    }
-    .blog-row-scroll::-webkit-scrollbar-thumb {
-      background: #38bdf8;
-      border-radius: 10px;
+    /* --- 3-COLUMN GRID LAYOUT (NO HORIZONTAL SCROLL) --- */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      width: 100%;
     }
 
     .showcase-card {
-      /* Force exactly 3 cards per visible row */
-      flex: 0 0 calc(33.333% - 14px); 
-      min-width: 280px; 
-      scroll-snap-align: start;
-      
+      width: 100%;
       min-height: 240px; 
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -334,6 +314,14 @@
       font-size: 0.85rem;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
+
+    /* Responsive grid adjustments for tablet and mobile */
+    @media (max-width: 1024px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -365,7 +353,7 @@
     </div>
 
     <main>
-      <div id="blog-list" class="blog-row-scroll"></div>
+      <div id="blog-list" class="blog-grid"></div>
     </main>
 
     <footer>
@@ -425,14 +413,6 @@
         category: "#Technology",
         date: "2026-07-31",
         description: "Express.js simplifies route handling and request management in Node.js. By connecting REST APIs to frontend Fetch calls, you create seamless experiences."
-      },
-      {
-        id: 4,
-        title: "React vs Vue in Modern Web Apps",
-        author: "Maria Garcia",
-        category: "#Frontend",
-        date: "2026-08-05",
-        description: "A comprehensive breakdown of state management, component architecture, and performance differences between React and Vue."
       }
     ];
 
@@ -441,12 +421,11 @@
     });
 
     function initApp() {
-      // Key updated to v4 to force refresh default items in browser cache
-      let stored = localStorage.getItem("my_blog_posts_v4");
+      let stored = localStorage.getItem("my_blog_posts_v5");
       let blogs = stored ? JSON.parse(stored) : defaultArticles;
 
       if (!stored || blogs.length === 0) {
-        localStorage.setItem("my_blog_posts_v4", JSON.stringify(defaultArticles));
+        localStorage.setItem("my_blog_posts_v5", JSON.stringify(defaultArticles));
         blogs = defaultArticles;
       }
 
@@ -501,9 +480,9 @@
     }
 
     function removePost(id) {
-      let current = JSON.parse(localStorage.getItem("my_blog_posts_v4")) || defaultArticles;
+      let current = JSON.parse(localStorage.getItem("my_blog_posts_v5")) || defaultArticles;
       current = current.filter(b => b.id !== id);
-      localStorage.setItem("my_blog_posts_v4", JSON.stringify(current));
+      localStorage.setItem("my_blog_posts_v5", JSON.stringify(current));
       render(current);
     }
 
@@ -523,7 +502,7 @@
       }
 
       const today = new Date().toISOString().split('T')[0];
-      let current = JSON.parse(localStorage.getItem("my_blog_posts_v4")) || defaultArticles;
+      let current = JSON.parse(localStorage.getItem("my_blog_posts_v5")) || defaultArticles;
       
       const newPost = {
         id: Date.now(),
@@ -535,7 +514,7 @@
       };
 
       current.unshift(newPost);
-      localStorage.setItem("my_blog_posts_v4", JSON.stringify(current));
+      localStorage.setItem("my_blog_posts_v5", JSON.stringify(current));
       
       document.getElementById('post-title').value = '';
       document.getElementById('post-author').value = '';
