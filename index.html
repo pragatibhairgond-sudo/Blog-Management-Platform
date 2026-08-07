@@ -19,6 +19,7 @@
       min-height: 100vh;
     }
 
+    /* Navigation Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -28,6 +29,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
       margin-bottom: 28px;
+      backdrop-filter: blur(10px);
     }
 
     .logo {
@@ -36,6 +38,31 @@
       color: #f1f5f9;
     }
 
+    nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      color: #94a3b8;
+      background: transparent;
+      border: 1px solid transparent;
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.active, .nav-btn:hover {
+      background: #6366f1;
+      color: #ffffff;
+      border-color: #6366f1;
+    }
+
+    /* Hero Section */
     .hero {
       text-align: center;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.9));
@@ -92,6 +119,7 @@
       white-space: nowrap;
     }
 
+    /* Article Showcase */
     main h2 {
       font-size: 1.25rem;
       font-weight: 700;
@@ -165,6 +193,73 @@
       line-height: 1.45;
     }
 
+    /* Modal Popup Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 25px;
+      width: 90%;
+      max-width: 450px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px; right: 20px;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .modal-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #1e293b;
+      color: #fff;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .submit-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover { background: #4f46e5; }
+
     footer {
       text-align: center;
       margin-top: 50px;
@@ -175,10 +270,16 @@
 </head>
 <body>
 
+  <!-- Navigation Header with Home & Add Blog -->
   <header>
     <div class="logo">⚡ Developer's Corner</div>
+    <nav>
+      <a href="index.html" class="nav-btn active">Home</a>
+      <button class="nav-btn" onclick="openAddModal()">Add Blog</button>
+    </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h1>Welcome to <span>Developer's Corner</span></h1>
     <p>Discover insightful articles, tutorials, and tips on modern full-stack engineering.</p>
@@ -188,10 +289,25 @@
     </div>
   </section>
 
+  <!-- Main Content -->
   <main>
     <h2>🔥 Horizontal Article Showcase</h2>
     <div id="blog-list" class="horizontal-showcase"></div>
   </main>
+
+  <!-- Add Blog Modal Popup -->
+  <div id="add-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAddModal()">&times;</span>
+      <h2>✏️ Add New Article</h2>
+      <form id="add-blog-form">
+        <input type="text" id="new-title" placeholder="Article Title" required>
+        <input type="text" id="new-category" placeholder="Category Tag (e.g. #Web_Dev)" required>
+        <textarea id="new-desc" placeholder="Article Description..." rows="4" required></textarea>
+        <button type="submit" class="submit-btn">Publish Article</button>
+      </form>
+    </div>
+  </div>
 
   <footer>
     <p>© 2026 Developer's Corner • Powered by Node.js & Express</p>
@@ -234,14 +350,39 @@
 
       render(blogs);
 
+      // Search Handler
       const searchInput = document.getElementById('search-input');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
           const q = e.target.value.toLowerCase();
-          const filtered = blogs.filter(b => 
+          const currentData = JSON.parse(localStorage.getItem("my_blog_posts")) || defaultData;
+          const filtered = currentData.filter(b => 
             b.title.toLowerCase().includes(q) || b.description.toLowerCase().includes(q)
           );
           render(filtered);
+        });
+      }
+
+      // Add Blog Form Handler
+      const form = document.getElementById('add-blog-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('new-title').value.trim();
+          let category = document.getElementById('new-category').value.trim();
+          const description = document.getElementById('new-desc').value.trim();
+
+          if (!category.startsWith('#')) category = '#' + category;
+
+          const current = JSON.parse(localStorage.getItem("my_blog_posts")) || defaultData;
+          const newPost = { id: Date.now(), title, category, description };
+
+          current.unshift(newPost);
+          localStorage.setItem("my_blog_posts", JSON.stringify(current));
+
+          render(current);
+          form.reset();
+          closeAddModal();
         });
       }
     }
@@ -278,6 +419,14 @@
       current = current.filter(b => b.id !== id);
       localStorage.setItem("my_blog_posts", JSON.stringify(current));
       render(current);
+    }
+
+    function openAddModal() {
+      document.getElementById('add-modal').style.display = 'flex';
+    }
+
+    function closeAddModal() {
+      document.getElementById('add-modal').style.display = 'none';
     }
   </script>
 </body>
