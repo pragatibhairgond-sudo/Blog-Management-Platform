@@ -1,74 +1,62 @@
-// Hardcoded blog data directly inside script.js
 const blogs = [
   {
     id: 1,
-    title: "Getting Started with JavaScript",
-    author: "Aarti Kamble",
-    description: "Learn the core basics of modern JavaScript, including DOM manipulation, ES6 features, and async operations."
+    title: "Getting Started with Modern JavaScript",
+    category: "#AI_ML",
+    description: "Learn the essential fundamentals of modern JavaScript, including arrow functions, DOM manipulation, and..."
   },
   {
     id: 2,
-    title: "Building REST APIs with Express",
-    author: "Tech Explorer",
-    description: "A step-by-step guide on creating robust backend APIs using Express, middleware, and Node.js."
+    title: "Building RESTful APIs with Node.js & Express",
+    category: "#Cloud_DevOps",
+    description: "A comprehensive beginner-friendly guide to setting up route handlers, middleware, and handling JSON data i..."
   },
   {
     id: 3,
-    title: "Mastering Responsive Web Design",
-    author: "Frontend Dev",
-    description: "Discover essential CSS Grid, Flexbox, and media query techniques to build layout designs for all screen sizes."
+    title: "Deploying Web Applications to GitHub Pages",
+    category: "#Web_Dev",
+    description: "Discover how to configure repository settings, resolve missing static assets, and deploy responsive web proj..."
   }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  displayBlogs();
+  renderBlogs();
 });
 
-function displayBlogs() {
-  // 1. Find the target container in HTML
-  const blogContainer = document.getElementById('blog-list') || 
-                        document.querySelector('.blog-grid') || 
-                        document.querySelector('.horizontal-showcase') ||
-                        document.querySelector('main');
+function renderBlogs() {
+  const container = document.getElementById('blog-list');
+  const countElem = document.getElementById('total-articles');
 
-  if (blogContainer) {
-    // Create grid wrapper if rendering directly into main
-    let listElement = document.getElementById('blog-list');
-    if (!listElement) {
-      listElement = document.createElement('div');
-      listElement.id = 'blog-list';
-      listElement.style.display = 'flex';
-      listElement.style.gap = '20px';
-      listElement.style.padding = '20px 0';
-      listElement.style.overflowX = 'auto';
-      blogContainer.appendChild(listElement);
-    } else {
-      listElement.innerHTML = '';
-    }
-
-    // 2. Render each article card
-    blogs.forEach(blog => {
-      const card = document.createElement('div');
-      card.className = 'blog-card';
-      card.style.minWidth = '280px';
-      card.style.border = '1px solid #334155';
-      card.style.padding = '20px';
-      card.style.borderRadius = '12px';
-      card.style.background = 'rgba(30, 41, 59, 0.7)';
-
-      card.innerHTML = `
-        <h3 style="color: #38bdf8; margin-top: 0;">${blog.title}</h3>
-        <p style="color: #94a3b8; font-size: 0.85em;">By <strong>${blog.author}</strong></p>
-        <p style="color: #cbd5e1; font-size: 0.95em; line-height: 1.5;">${blog.description}</p>
-      `;
-      listElement.appendChild(card);
-    });
+  if (countElem) {
+    countElem.textContent = blogs.length;
   }
 
-  // 3. Update the counter element
-  const totalCountElem = document.getElementById('total-articles') || 
-                         document.querySelector('.badge span');
-  if (totalCountElem) {
-    totalCountElem.textContent = blogs.length;
+  if (!container) return;
+
+  container.innerHTML = ''; // Clear container
+
+  blogs.forEach(blog => {
+    const card = document.createElement('div');
+    card.className = 'showcase-card';
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="tag-pill">${blog.category}</span>
+        <div class="card-actions">
+          <button class="btn-edit">✏️ Edit</button>
+          <button class="btn-delete" onclick="deleteArticle(${blog.id})">🗑️ Delete</button>
+        </div>
+      </div>
+      <h3 class="card-title">${blog.title}</h3>
+      <p class="card-desc">${blog.description}</p>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function deleteArticle(id) {
+  const index = blogs.findIndex(item => item.id === id);
+  if (index !== -1) {
+    blogs.splice(index, 1);
+    renderBlogs();
   }
 }
