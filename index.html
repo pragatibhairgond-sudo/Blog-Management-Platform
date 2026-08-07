@@ -20,7 +20,7 @@
       min-height: 100vh;
     }
 
-    /* Top Navigation Bar */
+    /* Top Navigation Header */
     header {
       display: flex;
       justify-content: space-between;
@@ -78,7 +78,7 @@
       box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
     }
 
-    /* Hero Banner Header */
+    /* Hero Banner */
     .hero {
       text-align: center;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
@@ -104,7 +104,7 @@
       font-size: 0.98rem;
     }
 
-    /* Centered Floating Search Bar */
+    /* Floating Search Bar */
     .search-wrapper {
       display: flex;
       justify-content: center;
@@ -145,7 +145,7 @@
       color: #94a3b8;
     }
 
-    /* Main Application Container */
+    /* Main Container */
     .app-container {
       max-width: 1450px;
       margin: 0 auto;
@@ -174,21 +174,46 @@
       font-weight: 600;
     }
 
-    /* WIDER & BREADTHIER BLOG CARDS GRID */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); /* Increased min-width to 420px */
+    /* --- 3 CARDS PER ROW WITH HORIZONTAL SCROLLBAR --- */
+    .blog-row-scroll {
+      display: flex;
       gap: 32px;
-      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 30px; /* Space for the scrollbar */
+      scroll-snap-type: x mandatory;
+      
+      /* Firefox Scrollbar */
+      scrollbar-width: thin;
+      scrollbar-color: #38bdf8 rgba(255, 255, 255, 0.05);
+    }
+
+    /* Custom Webkit Scrollbar (Chrome/Edge/Safari) */
+    .blog-row-scroll::-webkit-scrollbar {
+      height: 12px;
+    }
+    .blog-row-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    .blog-row-scroll::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 10px;
+    }
+    .blog-row-scroll::-webkit-scrollbar-thumb:hover {
+      background: #ec4899;
     }
 
     .showcase-card {
-      width: 100%;
-      min-height: 250px; /* Increased card breadth/height */
+      /* Forces exactly 3 cards into view (33.33% minus the gap space) */
+      flex: 0 0 calc(33.333% - 22px); 
+      min-width: 400px; /* Fallback for smaller screens */
+      scroll-snap-align: start;
+      
+      min-height: 250px; 
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 28px 32px; /* Increased internal padding/breadth */
+      padding: 28px 32px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -201,7 +226,7 @@
       border-color: rgba(56, 189, 248, 0.4);
     }
 
-    /* Meta Info Bar: Category, Author, and Date */
+    /* Meta Info Bar */
     .card-meta {
       display: flex;
       align-items: center;
@@ -256,7 +281,7 @@
       margin-bottom: 20px;
     }
 
-    /* Bottom Card Footer Actions */
+    /* Card Actions Footer */
     .card-footer {
       display: flex;
       justify-content: flex-start;
@@ -279,7 +304,7 @@
     .btn-edit { background: #6366f1; }
     .btn-delete { background: #f43f5e; }
 
-    /* Modal Popup Styles */
+    /* Modal Popup */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -361,11 +386,18 @@
       font-size: 0.85rem;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 1200px) {
+      .showcase-card { flex: 0 0 calc(50% - 16px); }
+    }
+    @media (max-width: 768px) {
+      .showcase-card { flex: 0 0 100%; min-width: 100%; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
   <header>
     <div class="logo">⚡ Developer's Corner</div>
     <nav class="nav-links">
@@ -374,13 +406,11 @@
     </nav>
   </header>
 
-  <!-- Hero Banner -->
   <section class="hero">
     <h1>Welcome to <span>Developer's Corner</span></h1>
     <p>Discover articles on Web Development, Design, and Technology.</p>
   </section>
 
-  <!-- Centered Floating Search Bar -->
   <div class="search-wrapper">
     <div class="search-bar">
       <span class="search-icon">🔍</span>
@@ -394,9 +424,9 @@
       <div class="badge">Total Articles: <span id="total-articles">0</span></div>
     </div>
 
-    <!-- Blog Grid Showcase -->
     <main>
-      <div id="blog-list" class="blog-grid"></div>
+      <!-- Horizontal Scroll Container -->
+      <div id="blog-list" class="blog-row-scroll"></div>
     </main>
 
     <footer>
@@ -404,13 +434,13 @@
     </footer>
   </div>
 
-  <!-- Create Post Modal Popup with Author Field -->
+  <!-- Create Post Modal -->
   <div id="create-modal" class="modal-overlay">
     <div class="modal-content">
       <h3>Create New Article</h3>
       <div class="form-group">
         <label>Article Title</label>
-        <input type="text" id="post-title" placeholder="e.g. How AI is changing web development in 2026">
+        <input type="text" id="post-title" placeholder="e.g. Next.js 15 Deep Dive">
       </div>
       <div class="form-group">
         <label>Author Name</label>
@@ -432,6 +462,7 @@
   </div>
 
   <script>
+    // Note: Added a 4th default article so the scrollbar is immediately visible
     const defaultArticles = [
       {
         id: 1,
@@ -456,6 +487,14 @@
         category: "#Technology",
         date: "2026-07-31",
         description: "Express.js simplifies route handling and request management in Node.js. By connecting REST APIs to frontend Fetch calls, you create seamless application experiences."
+      },
+      {
+        id: 4,
+        title: "React vs. Vue: Choosing the Right Framework",
+        author: "Maria Garcia",
+        category: "#Frontend",
+        date: "2026-08-05",
+        description: "A comprehensive breakdown of the state management, reactivity, and ecosystem differences between React and Vue in modern enterprise applications."
       }
     ];
 
