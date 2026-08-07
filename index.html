@@ -20,15 +20,15 @@
       min-height: 100vh;
     }
 
-    /* Top Navigation Header */
+    /* UPDATED HEADER COLOR & STYLING */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 18px 5%;
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
+      background: linear-gradient(90deg, #0f172a 0%, #1a233a 100%);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     .logo {
@@ -174,7 +174,7 @@
       font-weight: 600;
     }
 
-    /* --- 3-COLUMN GRID LAYOUT (NO HORIZONTAL SCROLL) --- */
+    /* 3-Column Grid Layout */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -315,7 +315,6 @@
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Responsive grid adjustments for tablet and mobile */
     @media (max-width: 1024px) {
       .blog-grid { grid-template-columns: repeat(2, 1fr); }
     }
