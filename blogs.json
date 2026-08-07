@@ -1,26 +1,35 @@
-[
-  {
-    "id": 1,
-    "title": "How AI is changing web development in 2026",
-    "author": "Aarti Kamble",
-    "category": "Web Dev",
-    "content": "AI tools are speeding up full-stack development workflows and code generation.",
-    "date": "2026-07-24"
-  },
-  {
-    "id": 2,
-    "title": "Mastering CSS Grid and Modern Layouts",
-    "author": "Alex Rivera",
-    "category": "CSS Design",
-    "content": "Combining CSS Flexbox and CSS Grid gives you complete creative control over UI components.",
-    "date": "2026-07-30"
-  },
-  {
-    "id": 3,
-    "title": "Building RESTful APIs with Express.js",
-    "author": "Aarti Kamble",
-    "category": "Technology",
-    "content": "Express.js simplifies route handling and request management in Node.js.",
-    "date": "2026-07-31"
+async function fetchBlogs() {
+  try {
+    const res = await fetch('/api/blogs');
+    if (!res.ok) throw new Error("Backend offline");
+    allBlogs = await res.json();
+  } catch (err) {
+    console.warn("Backend API not connected. Displaying fallback articles:", err);
+    
+    // Fallback sample data so posts appear on GitHub Pages
+    allBlogs = [
+      {
+        id: 1,
+        title: "HTML Basics & Modern Semantic Tags",
+        author: "Tim Berners-Lee",
+        description: "HTML is the backbone of the web. Learn about modern semantic elements, accessibility, and structured document markup.",
+        date: "Aug 4, 2026"
+      },
+      {
+        id: 2,
+        title: "Mastering CSS Flexbox & Modern Grid",
+        author: "Håkon Wium Lie",
+        description: "Explore how to build modern responsive web page layouts effortlessly using flexible box containers and 2D grid systems.",
+        date: "Aug 5, 2026"
+      },
+      {
+        id: 3,
+        title: "Async JavaScript & The Fetch API",
+        author: "Brendan Eich",
+        description: "Understand Promises, async/await syntax, and how to seamlessly fetch data from RESTful APIs in modern web applications.",
+        date: "Aug 6, 2026"
+      }
+    ];
   }
-]
+  renderBlogs(allBlogs);
+}
