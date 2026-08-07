@@ -19,34 +19,83 @@
       min-height: 100vh;
     }
 
+    /* Outer Wrapper for Wider Screen Stretch */
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header & Navigation Buttons */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 28px;
+      padding: 18px 32px;
       background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+      border-radius: 16px;
       margin-bottom: 28px;
     }
 
     .logo {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #f1f5f9;
     }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      color: #94a3b8;
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-btn.active, .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .btn-create-nav {
+      background: linear-gradient(90deg, #6366f1, #3b82f6);
+      color: #ffffff;
+      padding: 9px 20px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-create-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Hero Section */
     .hero {
       text-align: center;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.9));
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      padding: 40px 20px;
+      padding: 45px 20px;
       margin-bottom: 35px;
     }
 
     .hero h1 {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 800;
       margin-bottom: 10px;
     }
@@ -59,7 +108,7 @@
 
     .hero p {
       color: #94a3b8;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       margin-bottom: 25px;
     }
 
@@ -68,13 +117,13 @@
       justify-content: center;
       align-items: center;
       gap: 15px;
-      max-width: 500px;
+      max-width: 550px;
       margin: 0 auto;
     }
 
     .search-bar input {
       flex: 1;
-      padding: 10px 18px;
+      padding: 12px 20px;
       border-radius: 25px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       background: rgba(15, 23, 42, 0.8);
@@ -85,34 +134,34 @@
     .badge {
       background: #6366f1;
       color: #ffffff;
-      padding: 8px 18px;
+      padding: 10px 20px;
       border-radius: 25px;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 600;
       white-space: nowrap;
     }
 
     main h2 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    /* CSS Grid Layout - Expands to fill full screen width */
+    /* WIDER BLOG GRID LAYOUT */
     .horizontal-showcase {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Increased width from 300px to 380px */
+      gap: 28px;
       width: 100%;
     }
 
     .showcase-card {
       width: 100%;
-      max-width: 100%;
+      min-height: 200px;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 22px;
+      border-radius: 18px;
+      padding: 26px; /* Increased internal padding */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -123,29 +172,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .tag-pill {
       background: rgba(56, 189, 248, 0.15);
       color: #38bdf8;
       border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 600;
     }
 
     .card-actions {
       display: flex;
-      gap: 6px;
+      gap: 8px;
     }
 
     .btn-edit, .btn-delete {
       border: none;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 15px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       color: #ffffff;
@@ -156,51 +205,158 @@
 
     .card-title {
       color: #ffffff;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin: 10px 0;
+      margin: 12px 0 8px;
     }
 
     .card-desc {
       color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Modal Popup Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
       font-size: 0.85rem;
-      line-height: 1.45;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(30, 41, 59, 0.6);
+      color: #ffffff;
+      outline: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #94a3b8;
+      padding: 8px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      background: #6366f1;
+      border: none;
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     footer {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 60px;
       color: #64748b;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">⚡ Developer's Corner</div>
-  </header>
+  <div class="app-container">
+    <!-- Header Navigation -->
+    <header>
+      <div class="logo">⚡ Developer's Corner</div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-btn active">🏠 Home</a>
+        <button class="btn-create-nav" onclick="toggleModal(true)">➕ Create Post</button>
+      </nav>
+    </header>
 
-  <section class="hero">
-    <h1>Welcome to <span>Developer's Corner</span></h1>
-    <p>Discover insightful articles, tutorials, and tips on modern full-stack engineering.</p>
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search articles by title...">
-      <div class="badge">Total Articles: <span id="total-articles">0</span></div>
+    <!-- Hero Banner -->
+    <section class="hero">
+      <h1>Welcome to <span>Developer's Corner</span></h1>
+      <p>Discover insightful articles, tutorials, and tips on modern full-stack engineering.</p>
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search articles by title...">
+        <div class="badge">Total Articles: <span id="total-articles">0</span></div>
+      </div>
+    </section>
+
+    <!-- Blog Grid Showcase -->
+    <main>
+      <h2>🔥 Article Showcase</h2>
+      <div id="blog-list" class="horizontal-showcase"></div>
+    </main>
+
+    <footer>
+      <p>© 2026 Developer's Corner • Powered by Node.js & Express</p>
+    </footer>
+  </div>
+
+  <!-- Create Post Modal Popup -->
+  <div id="create-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Create New Article</h3>
+      <div class="form-group">
+        <label>Article Title</label>
+        <input type="text" id="post-title" placeholder="e.g. Master React Hooks">
+      </div>
+      <div class="form-group">
+        <label>Category Tag</label>
+        <input type="text" id="post-category" placeholder="e.g. #Web_Dev or #AI_ML">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="post-desc" rows="4" placeholder="Write a short summary..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="toggleModal(false)">Cancel</button>
+        <button class="btn-submit" onclick="createNewPost()">Publish Article</button>
+      </div>
     </div>
-  </section>
-
-  <main>
-    <h2>🔥 Horizontal Article Showcase</h2>
-    <div id="blog-list" class="horizontal-showcase"></div>
-  </main>
-
-  <footer>
-    <p>© 2026 Developer's Corner • Powered by Node.js & Express</p>
-  </footer>
+  </div>
 
   <script>
-    const defaultData = [
+    const defaultArticles = [
       {
         id: 1,
         title: "Getting Started with Modern JavaScript",
@@ -227,11 +383,11 @@
 
     function initApp() {
       let stored = localStorage.getItem("my_blog_posts");
-      let blogs = stored ? JSON.parse(stored) : defaultData;
+      let blogs = stored ? JSON.parse(stored) : defaultArticles;
 
       if (!stored || blogs.length === 0) {
-        localStorage.setItem("my_blog_posts", JSON.stringify(defaultData));
-        blogs = defaultData;
+        localStorage.setItem("my_blog_posts", JSON.stringify(defaultArticles));
+        blogs = defaultArticles;
       }
 
       render(blogs);
@@ -239,9 +395,9 @@
       const searchInput = document.getElementById('search-input');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-          const q = e.target.value.toLowerCase();
+          const query = e.target.value.toLowerCase();
           const filtered = blogs.filter(b => 
-            b.title.toLowerCase().includes(q) || b.description.toLowerCase().includes(q)
+            b.title.toLowerCase().includes(query) || b.description.toLowerCase().includes(query)
           );
           render(filtered);
         });
@@ -262,7 +418,7 @@
         card.className = 'showcase-card';
         card.innerHTML = `
           <div class="card-header">
-            <span class="tag-pill">${item.category}</span>
+            <span class="tag-pill">${item.category || '#Dev'}</span>
             <div class="card-actions">
               <button class="btn-edit">✏️ Edit</button>
               <button class="btn-delete" onclick="removePost(${item.id})">🗑️ Delete</button>
@@ -276,9 +432,43 @@
     }
 
     function removePost(id) {
-      let current = JSON.parse(localStorage.getItem("my_blog_posts")) || defaultData;
+      let current = JSON.parse(localStorage.getItem("my_blog_posts")) || defaultArticles;
       current = current.filter(b => b.id !== id);
       localStorage.setItem("my_blog_posts", JSON.stringify(current));
+      render(current);
+    }
+
+    function toggleModal(show) {
+      document.getElementById('create-modal').style.display = show ? 'flex' : 'none';
+    }
+
+    function createNewPost() {
+      const title = document.getElementById('post-title').value.trim();
+      const category = document.getElementById('post-category').value.trim();
+      const description = document.getElementById('post-desc').value.trim();
+
+      if (!title || !description) {
+        alert("Please enter a title and description.");
+        return;
+      }
+
+      let current = JSON.parse(localStorage.getItem("my_blog_posts")) || defaultArticles;
+      const newPost = {
+        id: Date.now(),
+        title: title,
+        category: category.startsWith('#') ? category : `#${category || 'Dev'}`,
+        description: description
+      };
+
+      current.unshift(newPost);
+      localStorage.setItem("my_blog_posts", JSON.stringify(current));
+      
+      // Reset inputs & close modal
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-category').value = '';
+      document.getElementById('post-desc').value = '';
+      toggleModal(false);
+
       render(current);
     }
   </script>
