@@ -49,21 +49,12 @@
       gap: 8px;
     }
 
-    .logo span {
-      color: #38bdf8;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
     .nav-link {
       color: #94a3b8;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.9rem;
+      margin-right: 15px;
       transition: color 0.2s;
     }
 
@@ -160,22 +151,42 @@
       font-weight: 700;
     }
 
-    /* Blog Grid */
+    /* 3D Blog Grid */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 24px;
       margin-bottom: 40px;
+      perspective: 1000px;
     }
 
+    /* 3D Card Animation & Effects */
     .blog-card {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.5));
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.6));
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
       padding: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Hover 3D Lift */
+    .blog-card:hover {
+      transform: translateY(-10px) rotateX(4deg) rotateY(-2deg) scale(1.02);
+      box-shadow: 0 20px 35px rgba(56, 189, 248, 0.25), 0 0 20px rgba(99, 102, 241, 0.3);
+      border-color: rgba(56, 189, 248, 0.6);
+    }
+
+    /* 3D Active Selected Highlight State */
+    .blog-card.active-3d {
+      transform: translateY(-8px) scale(1.03) translateZ(15px);
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.6), 0 0 20px rgba(236, 72, 153, 0.5);
+      border: 2px solid #38bdf8;
     }
 
     .card-meta {
@@ -211,17 +222,21 @@
       font-size: 0.85rem;
       line-height: 1.5;
       margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .card-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .btn-edit, .btn-delete {
+    .btn-read, .btn-edit, .btn-delete {
       border: none;
-      padding: 6px 14px;
-      border-radius: 14px;
+      padding: 7px 12px;
+      border-radius: 12px;
       font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
@@ -229,18 +244,25 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
+    .btn-read { background: #38bdf8; color: #0f172a; }
     .btn-edit { background: #6366f1; }
     .btn-delete { background: #f43f5e; }
 
-    /* Modal Popup */
+    .btn-read:hover, .btn-edit:hover, .btn-delete:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* Modal Styling */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
       justify-content: center;
       align-items: center;
       z-index: 1000;
@@ -248,17 +270,19 @@
 
     .modal-content {
       background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
       padding: 28px;
       width: 90%;
-      max-width: 480px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      max-width: 540px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+      max-height: 85vh;
+      overflow-y: auto;
     }
 
     .modal-content h2 {
-      margin-bottom: 20px;
-      font-size: 1.3rem;
+      margin-bottom: 16px;
+      font-size: 1.4rem;
       color: #ffffff;
     }
 
@@ -304,6 +328,20 @@
       border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
+    }
+
+    /* Read Article Modal Custom Typography */
+    .read-article-body {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      color: #e2e8f0;
+      font-size: 1rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      margin-top: 15px;
+      margin-bottom: 20px;
     }
 
     footer {
@@ -372,6 +410,22 @@
     </div>
   </div>
 
+  <!-- Dedicated Read Article / Zoom Modal -->
+  <div id="read-modal" class="modal">
+    <div class="modal-content">
+      <div class="card-meta">
+        <span id="read-tag" class="tag-pill">#Category</span>
+        <span id="read-author" class="author-info">✍️ Author</span>
+        <span id="read-date" class="post-date">2026-08-08</span>
+      </div>
+      <h2 id="read-title" style="margin-top: 10px; font-size: 1.5rem; color: #ffffff;">Article Title</h2>
+      <div id="read-desc" class="read-article-body">Full article body content goes here...</div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeReadModal()">Close Article</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const defaultArticles = [
       {
@@ -380,7 +434,7 @@
         author: "Alex Rivera",
         date: "2026-07-24",
         tag: "#AI_ML",
-        description: "AI tools are no longer optional for developers. From automated code completion to intelligent API design, AI is speeding up full-stack workflows."
+        description: "AI tools are no longer optional for developers. From automated code completion to intelligent API design, AI is speeding up full-stack workflows. Developers leverage modern LLMs to write unit tests, generate CSS styles, and automate repetitive backend logic."
       },
       {
         id: 2,
@@ -388,7 +442,7 @@
         author: "Sarah Chen",
         date: "2026-07-30",
         tag: "#CSS_Design",
-        description: "Designing responsive layouts has never been easier. Combining CSS Flexbox for 1D alignments and CSS Grid for 2D structures gives you complete creative control."
+        description: "Designing responsive layouts has never been easier. Combining CSS Flexbox for 1D alignments and CSS Grid for 2D structures gives you complete creative control. Harness fractional units, auto-fit repeaters, and modern 3D transforms to elevate web experiences."
       },
       {
         id: 3,
@@ -396,7 +450,7 @@
         author: "David Kim",
         date: "2026-07-31",
         tag: "#Technology",
-        description: "Express.js simplifies route handling and request management in Node.js. By connecting REST APIs to frontend Fetch calls, you create seamless experiences."
+        description: "Express.js simplifies route handling and request management in Node.js. By connecting REST APIs to frontend Fetch calls, you create seamless experiences. Learn middleware architecture, token authentication, and clean error handling."
       }
     ];
 
@@ -451,12 +505,10 @@
         let articles = getArticles();
 
         if (editId) {
-          // Edit existing
           articles = articles.map(item => item.id == editId ? {
             ...item, title, author, tag, description
           } : item);
         } else {
-          // Add new
           const today = new Date().toISOString().split('T')[0];
           articles.unshift({
             id: Date.now(),
@@ -484,13 +536,21 @@
       container.innerHTML = '';
 
       if (list.length === 0) {
-        container.innerHTML = '<p style="color: #64748b; grid-column: 1/-1;">No articles match your search.</p>';
+        container.innerHTML = '<p style="color: #64748b; grid-column: 1/-1; text-align: center;">No articles match your search.</p>';
         return;
       }
 
       list.forEach(item => {
         const card = document.createElement('div');
         card.className = 'blog-card';
+        card.onclick = (e) => {
+          // Toggle 3D highlight outline on click
+          if (!e.target.closest('button')) {
+            document.querySelectorAll('.blog-card').forEach(c => c.classList.remove('active-3d'));
+            card.classList.add('active-3d');
+          }
+        };
+
         card.innerHTML = `
           <div>
             <div class="card-meta">
@@ -502,6 +562,7 @@
             <p class="card-desc">${item.description}</p>
           </div>
           <div class="card-actions">
+            <button class="btn-read" onclick="openReadModal(${item.id})">🔍 Read</button>
             <button class="btn-edit" onclick="openEditModal(${item.id})">✏️ Edit</button>
             <button class="btn-delete" onclick="deleteArticle(${item.id})">🗑️ Delete</button>
           </div>
@@ -514,6 +575,23 @@
       let articles = getArticles().filter(item => item.id !== id);
       saveArticles(articles);
       render(articles);
+    }
+
+    function openReadModal(id) {
+      const item = getArticles().find(a => a.id === id);
+      if (!item) return;
+
+      document.getElementById('read-tag').textContent = item.tag;
+      document.getElementById('read-author').textContent = `✍️ ${item.author}`;
+      document.getElementById('read-date').textContent = item.date;
+      document.getElementById('read-title').textContent = item.title;
+      document.getElementById('read-desc').textContent = item.description;
+
+      document.getElementById('read-modal').style.display = 'flex';
+    }
+
+    function closeReadModal() {
+      document.getElementById('read-modal').style.display = 'none';
     }
 
     function openCreateModal() {
