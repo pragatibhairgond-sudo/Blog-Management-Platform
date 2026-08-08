@@ -15,206 +15,145 @@
     body {
       background-color: #0b0f19;
       color: #f8fafc;
-      padding: 0;
-      margin: 0;
+      padding: 20px;
       min-height: 100vh;
     }
 
-    /* HEADER BACKGROUND CHANGED TO LIGHT BLACK */
+    /* Header Navigation */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 5%;
-      background: #161b22; /* Light black / Charcoal */
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      padding: 16px 28px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(10px);
     }
 
     .logo {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: #f1f5f9;
     }
 
-    .nav-links {
+    nav {
       display: flex;
-      align-items: center;
-      gap: 20px;
+      gap: 12px;
     }
 
     .nav-btn {
       color: #94a3b8;
+      background: transparent;
+      border: 1px solid transparent;
       text-decoration: none;
-      font-size: 0.95rem;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
       font-weight: 600;
-      transition: color 0.2s;
-      background: none;
-      border: none;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .nav-btn:hover, .nav-btn.active {
+    .nav-btn.active, .nav-btn:hover {
+      background: #6366f1;
       color: #ffffff;
+      border-color: #6366f1;
     }
 
-    .btn-create-nav {
-      background: linear-gradient(90deg, #6366f1, #3b82f6);
-      color: #ffffff;
-      padding: 9px 22px;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn-create-nav:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-    }
-
-    /* Hero Banner */
+    /* Hero Section */
     .hero {
       text-align: center;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.95));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 55px 20px 50px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 20px;
+      margin-bottom: 35px;
     }
 
     .hero h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
       margin-bottom: 10px;
-      color: #ffffff;
     }
 
     .hero h1 span {
       background: linear-gradient(90deg, #38bdf8, #ec4899);
       background-clip: text;
-      -webkit-backdrop-clip: text;
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
       color: #94a3b8;
-      font-size: 0.98rem;
-    }
-
-    /* Floating Search Bar */
-    .search-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-top: -24px;
-      margin-bottom: 40px;
-      padding: 0 20px;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
     }
 
     .search-bar {
-      position: relative;
-      width: 100%;
-      max-width: 650px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .search-bar input {
-      width: 100%;
-      padding: 14px 22px 14px 48px;
-      border-radius: 35px;
+      flex: 1;
+      padding: 10px 18px;
+      border-radius: 25px;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: #0f172a;
+      background: rgba(15, 23, 42, 0.8);
       color: #ffffff;
-      font-size: 0.95rem;
       outline: none;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
-      transition: border-color 0.2s;
-    }
-
-    .search-bar input:focus {
-      border-color: #38bdf8;
-    }
-
-    .search-bar .search-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1rem;
-      color: #94a3b8;
-    }
-
-    /* Main Container */
-    .app-container {
-      max-width: 1450px;
-      margin: 0 auto;
-      padding: 0 30px 50px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-    }
-
-    .section-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #ffffff;
     }
 
     .badge {
       background: #6366f1;
       color: #ffffff;
-      padding: 8px 20px;
+      padding: 8px 18px;
       border-radius: 25px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      white-space: nowrap;
     }
 
-    /* 3-Column Grid Layout */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      width: 100%;
+    /* Showcase Section */
+    main h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .horizontal-showcase {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
     .showcase-card {
-      width: 100%;
-      min-height: 240px; 
+      min-width: 300px;
+      max-width: 330px;
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
-      padding: 24px 26px;
+      border-radius: 16px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s, border-color 0.2s;
+      scroll-snap-align: start;
     }
 
-    .showcase-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.4);
-    }
-
-    .card-meta {
+    .card-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .card-meta-left {
-      display: flex;
       align-items: center;
-      gap: 10px;
+      margin-bottom: 12px;
     }
 
     .tag-pill {
@@ -223,49 +162,21 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
       padding: 4px 12px;
       border-radius: 20px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
     }
 
-    .author-badge {
-      color: #e2e8f0;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .post-date {
-      color: #64748b;
-      font-size: 0.78rem;
-    }
-
-    .card-title {
-      color: #ffffff;
-      font-size: 1.18rem;
-      font-weight: 700;
-      margin: 8px 0;
-      line-height: 1.4;
-    }
-
-    .card-desc {
-      color: #94a3b8;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      margin-bottom: 16px;
-    }
-
-    .card-footer {
+    .card-actions {
       display: flex;
-      gap: 10px;
-      margin-top: auto;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 6px;
     }
 
     .btn-edit, .btn-delete {
       border: none;
-      padding: 6px 14px;
+      padding: 6px 12px;
+      min-height: 36px;
       border-radius: 12px;
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
       color: #ffffff;
@@ -274,8 +185,32 @@
     .btn-edit { background: #6366f1; }
     .btn-delete { background: #f43f5e; }
 
+    .card-title {
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    .card-desc {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+
+    /* Empty Search State UI */
+    .empty-state {
+      width: 100%;
+      text-align: center;
+      padding: 40px 20px;
+      color: #94a3b8;
+      font-size: 1rem;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+    }
+
     /* Modal Popup */
-    .modal-overlay {
+    .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -289,130 +224,131 @@
     .modal-content {
       background: #0f172a;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 30px;
+      border-radius: 16px;
+      padding: 25px;
       width: 90%;
-      max-width: 500px;
+      max-width: 450px;
+      position: relative;
     }
 
-    .modal-content h3 { font-size: 1.3rem; margin-bottom: 18px; color: #ffffff; }
-    .form-group { margin-bottom: 14px; }
-    .form-group label { display: block; font-size: 0.84rem; color: #94a3b8; margin-bottom: 6px; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 10px 14px; border-radius: 10px;
+    .close-btn {
+      position: absolute;
+      top: 15px; right: 20px;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .modal-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(30, 41, 59, 0.6); color: #ffffff; outline: none;
+      background: #1e293b;
+      color: #fff;
+      outline: none;
     }
 
-    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-    .btn-cancel { background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: #94a3b8; padding: 8px 16px; border-radius: 10px; cursor: pointer; }
-    .btn-submit { background: #6366f1; border: none; color: #ffffff; padding: 8px 18px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+    .submit-btn {
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
     footer {
       text-align: center;
-      padding: 30px 0;
+      margin-top: 50px;
       color: #64748b;
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.82rem;
     }
 
-    @media (max-width: 1024px) {
-      .blog-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .blog-grid { grid-template-columns: 1fr; }
+    /* Mobile Responsive Viewport Fix */
+    @media (max-width: 600px) {
+      .search-bar { flex-direction: column; }
+      .search-bar input { width: 100%; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Navigation -->
   <header>
     <div class="logo">⚡ Developer's Corner</div>
-    <nav class="nav-links">
+    <nav>
       <a href="index.html" class="nav-btn active">Home</a>
-      <button class="btn-create-nav" onclick="toggleModal(true)">+ Create Post</button>
+      <button class="nav-btn" onclick="openAddModal()">Add Blog</button>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Welcome to My <span> Tech Blog </span></h1>
-    <p>Discover articles on Web Development, Design, and Technology.</p>
-  </section>
-
-  <div class="search-wrapper">
+    <h1>Welcome to <span>Developer's Corner</span></h1>
+    <p>Discover insightful articles, tutorials, and tips on modern full-stack engineering.</p>
     <div class="search-bar">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="search-input" placeholder="Search blogs by title, author, or category...">
-    </div>
-  </div>
-
-  <div class="app-container">
-    <div class="section-header">
-      <h2 class="section-title">Recent Blog Posts</h2>
+      <input type="text" id="search-input" placeholder="Search articles by title...">
       <div class="badge">Total Articles: <span id="total-articles">0</span></div>
     </div>
+  </section>
 
-    <main>
-      <div id="blog-list" class="blog-grid"></div>
-    </main>
+  <!-- Content Section -->
+  <main>
+    <h2>🔥 Horizontal Article Showcase</h2>
+    <div id="blog-list" class="horizontal-showcase"></div>
+  </main>
 
-    <footer>
-      <p>© 2026 Developer's Corner • Powered by Node.js & Express</p>
-    </footer>
-  </div>
-
-  <!-- Create Post Modal -->
-  <div id="create-modal" class="modal-overlay">
+  <!-- Add Blog Modal -->
+  <div id="add-modal" class="modal">
     <div class="modal-content">
-      <h3>Create New Article</h3>
-      <div class="form-group">
-        <label>Article Title</label>
-        <input type="text" id="post-title" placeholder="e.g. Mastering Next.js 15">
-      </div>
-      <div class="form-group">
-        <label>Author Name</label>
-        <input type="text" id="post-author" placeholder="e.g. Alex Rivera">
-      </div>
-      <div class="form-group">
-        <label>Category Tag</label>
-        <input type="text" id="post-category" placeholder="e.g. #Web_Dev or #AI_ML">
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <textarea id="post-desc" rows="4" placeholder="Write a short summary..."></textarea>
-      </div>
-      <div class="modal-actions">
-        <button class="btn-cancel" onclick="toggleModal(false)">Cancel</button>
-        <button class="btn-submit" onclick="createNewPost()">Publish Article</button>
-      </div>
+      <span class="close-btn" onclick="closeAddModal()">&times;</span>
+      <h2>✏️ Add New Article</h2>
+      <form id="add-blog-form">
+        <input type="text" id="new-title" placeholder="Article Title" required>
+        <input type="text" id="new-category" placeholder="Category Tag (e.g. #Web_Dev)" required>
+        <textarea id="new-desc" placeholder="Article Description..." rows="4" required></textarea>
+        <button type="submit" class="submit-btn">Publish Article</button>
+      </form>
     </div>
   </div>
 
+  <footer>
+    <p>© 2026 Developer's Corner • Powered by Node.js & Express</p>
+  </footer>
+
   <script>
-    const defaultArticles = [
+    const defaultData = [
       {
         id: 1,
-        title: "How AI is changing web development in 2026",
-        author: "Alex Rivera",
+        title: "Getting Started with Modern JavaScript",
         category: "#AI_ML",
-        date: "2026-07-24",
-        description: "AI tools are no longer optional for developers. From automated code completion to intelligent API design, AI is speeding up full-stack workflows."
+        description: "Learn the essential fundamentals of modern JavaScript, including arrow functions, DOM manipulation, and modern ES6 features."
       },
       {
         id: 2,
-        title: "Mastering CSS Grid and Modern Layouts",
-        author: "Sarah Chen",
-        category: "#CSS_Design",
-        date: "2026-07-30",
-        description: "Designing responsive layouts has never been easier. Combining CSS Flexbox for 1D alignments and CSS Grid for 2D structures gives you complete creative control."
+        title: "Building RESTful APIs with Node.js & Express",
+        category: "#Cloud_DevOps",
+        description: "A comprehensive beginner-friendly guide to setting up route handlers, middleware, and handling JSON data in Express."
       },
       {
         id: 3,
-        title: "Building RESTful APIs with Express.js",
-        author: "David Kim",
-        category: "#Technology",
-        date: "2026-07-31",
-        description: "Express.js simplifies route handling and request management in Node.js. By connecting REST APIs to frontend Fetch calls, you create seamless experiences."
+        title: "Deploying Web Applications to GitHub Pages",
+        category: "#Web_Dev",
+        description: "Discover how to configure repository settings, resolve missing static assets, and deploy responsive web projects seamlessly."
       }
     ];
 
@@ -420,28 +356,61 @@
       initApp();
     });
 
-    function initApp() {
-      let stored = localStorage.getItem("my_blog_posts_v5");
-      let blogs = stored ? JSON.parse(stored) : defaultArticles;
+    // Storage Error Handler (Prevents crashes if localStorage is corrupted)
+    function getSafeStorage() {
+      try {
+        const stored = localStorage.getItem("my_blog_posts");
+        return stored ? JSON.parse(stored) : defaultData;
+      } catch (e) {
+        return defaultData;
+      }
+    }
 
-      if (!stored || blogs.length === 0) {
-        localStorage.setItem("my_blog_posts_v5", JSON.stringify(defaultArticles));
-        blogs = defaultArticles;
+    function initApp() {
+      let blogs = getSafeStorage();
+
+      if (!localStorage.getItem("my_blog_posts") || blogs.length === 0) {
+        localStorage.setItem("my_blog_posts", JSON.stringify(defaultData));
+        blogs = defaultData;
       }
 
       render(blogs);
 
+      // Debounced Search Input
       const searchInput = document.getElementById('search-input');
       if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-          const query = e.target.value.toLowerCase();
-          const filtered = blogs.filter(b => 
-            b.title.toLowerCase().includes(query) || 
-            b.description.toLowerCase().includes(query) ||
-            (b.author && b.author.toLowerCase().includes(query)) ||
-            (b.category && b.category.toLowerCase().includes(query))
+        searchInput.addEventListener('input', debounce((e) => {
+          const q = e.target.value.trim().toLowerCase();
+          const currentData = getSafeStorage();
+          const filtered = currentData.filter(b => 
+            b.title.toLowerCase().includes(q) || b.description.toLowerCase().includes(q)
           );
           render(filtered);
+        }, 250));
+      }
+
+      // Add Blog Form Handler with Input Trimming
+      const form = document.getElementById('add-blog-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('new-title').value.trim();
+          let category = document.getElementById('new-category').value.trim();
+          const description = document.getElementById('new-desc').value.trim();
+
+          if (!title || !description || !category) return; // Prevent empty posts
+
+          if (!category.startsWith('#')) category = '#' + category;
+
+          const current = getSafeStorage();
+          const newPost = { id: Date.now(), title, category, description };
+
+          current.unshift(newPost);
+          localStorage.setItem("my_blog_posts", JSON.stringify(current));
+
+          render(current);
+          form.reset();
+          closeAddModal();
         });
       }
     }
@@ -455,74 +424,52 @@
 
       container.innerHTML = '';
 
+      // Empty Search Result State
+      if (list.length === 0) {
+        container.innerHTML = `<div class="empty-state">🔍 No articles found matching your query.</div>`;
+        return;
+      }
+
       list.forEach(item => {
         const card = document.createElement('div');
         card.className = 'showcase-card';
         card.innerHTML = `
-          <div>
-            <div class="card-meta">
-              <div class="card-meta-left">
-                <span class="tag-pill">${item.category || '#Web_Dev'}</span>
-                <span class="author-badge">✍️ ${item.author || 'Admin'}</span>
-              </div>
-              <span class="post-date">${item.date || '2026-08-07'}</span>
+          <div class="card-header">
+            <span class="tag-pill">${item.category}</span>
+            <div class="card-actions">
+              <button class="btn-edit">✏️ Edit</button>
+              <button class="btn-delete" onclick="removePost(${item.id})">🗑️ Delete</button>
             </div>
-            <h3 class="card-title">${item.title}</h3>
-            <p class="card-desc">${item.description}</p>
           </div>
-          <div class="card-footer">
-            <button class="btn-edit">✏️ Edit</button>
-            <button class="btn-delete" onclick="removePost(${item.id})">🗑️ Delete</button>
-          </div>
+          <h3 class="card-title">${item.title}</h3>
+          <p class="card-desc">${item.description}</p>
         `;
         container.appendChild(card);
       });
     }
 
     function removePost(id) {
-      let current = JSON.parse(localStorage.getItem("my_blog_posts_v5")) || defaultArticles;
+      let current = getSafeStorage();
       current = current.filter(b => b.id !== id);
-      localStorage.setItem("my_blog_posts_v5", JSON.stringify(current));
+      localStorage.setItem("my_blog_posts", JSON.stringify(current));
       render(current);
     }
 
-    function toggleModal(show) {
-      document.getElementById('create-modal').style.display = show ? 'flex' : 'none';
+    function openAddModal() {
+      document.getElementById('add-modal').style.display = 'flex';
     }
 
-    function createNewPost() {
-      const title = document.getElementById('post-title').value.trim();
-      const author = document.getElementById('post-author').value.trim();
-      const category = document.getElementById('post-category').value.trim();
-      const description = document.getElementById('post-desc').value.trim();
+    function closeAddModal() {
+      document.getElementById('add-modal').style.display = 'none';
+    }
 
-      if (!title || !description) {
-        alert("Please enter a title and description.");
-        return;
-      }
-
-      const today = new Date().toISOString().split('T')[0];
-      let current = JSON.parse(localStorage.getItem("my_blog_posts_v5")) || defaultArticles;
-      
-      const newPost = {
-        id: Date.now(),
-        title: title,
-        author: author || 'Admin',
-        category: category.startsWith('#') ? category : `#${category || 'Web_Dev'}`,
-        date: today,
-        description: description
+    // Performance Optimization: Debounce Function
+    function debounce(func, delay = 250) {
+      let timeout;
+      return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
       };
-
-      current.unshift(newPost);
-      localStorage.setItem("my_blog_posts_v5", JSON.stringify(current));
-      
-      document.getElementById('post-title').value = '';
-      document.getElementById('post-author').value = '';
-      document.getElementById('post-category').value = '';
-      document.getElementById('post-desc').value = '';
-      toggleModal(false);
-
-      render(current);
     }
   </script>
 </body>
